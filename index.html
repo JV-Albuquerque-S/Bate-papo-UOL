@@ -19,13 +19,44 @@
         <ion-icon name="people" onclick="aparecerBarra()"></ion-icon>
     </header>
 
+    <!--Mensagens-->
+    <main>
+        <article class="statusMessage article">
+            <time>[09:21:45]</time>
+            <p>João entra na sala...</p>
+        </article>
+
+        <article class="regularMessage article">
+            <time>[09:21:45]</time>
+            <p>João para Todos: Bom dia rapeize!</p>
+        </article>
+
+        <article class="privateMessage article">
+            <time>[09:21:45]</time>
+            <p>João reservadamente para Maria: Oi gata mmuito gata, quer tc???</p>
+        </article>
+
+        <article class="statusMessage article">
+            <time>[09:21:45]</time>
+            <p>Maria sai da sala...</p>
+        </article>
+    </main>
+
+
+
+
+
+
+
+
+
     <!--Rodapé da página(Área de envio de mensagens)-->
     <footer class="footer">
         <input type="text" name="chat-text" id="message" placeholder="Escreva aqui...">
         <ion-icon name="paper-plane-outline"></ion-icon>
     </footer>
 
-    <nav class="nav-bar hidden">
+    <aside class="side-bar hidden">
         <div class="fundoOpaco" onclick="esconderBarra()"></div>
         <div class="participantes">
             <div class="h1">
@@ -59,8 +90,9 @@
                 <p>Reservadamente</p>
             </div>
         </div>
-    </nav>
+    </aside>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="assets/script.js"></script>
 </body>
