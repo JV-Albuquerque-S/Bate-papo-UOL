@@ -55,8 +55,8 @@ main {
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
     color: black;
-    word-wrap: break-word;
-    width: 100%;
+    overflow-wrap: break-word;
+    width: 80vw;
 }
 
 .status {
@@ -101,15 +101,11 @@ main {
     margin-right: 27px;
 }
 
-/*Barra de participantes ativos*/
+/*Barra lateral de participantes ativos*/
 
 .hidden {
     display: none;
 }
-
-/*aside {
-    transition: 0.3s linear;
-}*/
 
 .fundoOpaco {
     width: 100%;

@@ -1,8 +1,8 @@
 //Requisição e comparação do nome de usuário
 const userName = prompt("Diga-me seu lindo nome :)");
-if(userName === ""){
+if(userName === "" || userName.length > 15){
     window.location.reload();
-    alert("Por favor, digite um nome válido");
+    alert("Por favor, digite um nome válido (Entre 1 e 15 caracteres)");
 }
 
 let dados = {name: userName};
@@ -18,31 +18,20 @@ function envioErro(){
 function manterConexao(){
     const permanencia = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", dados);
 }
-
 setInterval(manterConexao, 5000);
 
+//Leitura, filtragem e escritura das mensagens
 let todasMensagens = [];
-function aparecerBarra() {
-    const barra = document.querySelector(".side-bar");
-    barra.classList.remove("hidden");
-}
-
-function esconderBarra() {
-    const barra = document.querySelector(".side-bar");
-    barra.classList.add("hidden");
-}
 
 function intervalo(){
     const promise = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
     promise.then(lerMensagens);
 
     function colocarMensagemNaTela(mensagem) {
-        //console.log(mensagem);
         const pagina = document.querySelector("main");
         let comparador = 0;
-        //let classeScroll = 0;
-        //classeScroll++;
         
+        //Filtragem de mensagens já escritas na página 
         for(let j = 0; j < todasMensagens.length; j++){
             if(mensagem.time === todasMensagens[j].time && mensagem.text === todasMensagens[j].text && mensagem.type === todasMensagens[j].type && mensagem.from === todasMensagens[j].from && mensagem.to === todasMensagens[j].to){
                 comparador++;
@@ -92,3 +81,29 @@ function intervalo(){
 }
 
 setInterval(intervalo, 3000);
+
+//Envio de mensagens
+function enviarMensagem(){
+    const mensagem = document.querySelector('input').value;
+    console.log(mensagem);
+    const mensagemPadronizada = {
+        from: userName,
+        to: "Todos",
+        text: mensagem,
+        type: "message"
+    }
+    const envio = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", mensagemPadronizada);
+    envio.then(intervalo());
+    //envio.catch(window.location.reload());
+}
+
+//JS da barra lateral
+function aparecerBarra() {
+    const barra = document.querySelector(".side-bar");
+    barra.classList.remove("hidden");
+}
+
+function esconderBarra() {
+    const barra = document.querySelector(".side-bar");
+    barra.classList.add("hidden");
+}
