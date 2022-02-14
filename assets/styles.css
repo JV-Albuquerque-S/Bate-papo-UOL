@@ -55,17 +55,19 @@ main {
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
     color: black;
+    word-wrap: break-word;
+    width: 100%;
 }
 
-.statusMessage {
+.status {
     background-color: #DCDCDC;
 }
 
-.regularMessage{
+.message{
     background-color: #FFFFFF;
 }
 
-.privateMessage{
+.private_message{
     background-color: #FFDEDE;
 }
 
