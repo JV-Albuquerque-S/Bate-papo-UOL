@@ -1,4 +1,26 @@
+//Requisição e comparação do nome de usuário
 const userName = prompt("Diga-me seu lindo nome :)");
+if(userName === ""){
+    window.location.reload();
+    alert("Por favor, digite um nome válido");
+}
+
+let dados = {name: userName};
+const requisicao = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", dados);
+requisicao.catch(envioErro);
+
+function envioErro(){
+    window.location.reload();
+    alert("Este nome já está sendo utilizado! Por favor, escolha outro.")
+}
+
+//Manutençao de conexão
+function manterConexao(){
+    const permanencia = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", dados);
+}
+
+setInterval(manterConexao, 5000);
+
 let todasMensagens = [];
 function aparecerBarra() {
     const barra = document.querySelector(".side-bar");
@@ -15,11 +37,11 @@ function intervalo(){
     promise.then(lerMensagens);
 
     function colocarMensagemNaTela(mensagem) {
-        console.log(mensagem);
+        //console.log(mensagem);
         const pagina = document.querySelector("main");
         let comparador = 0;
-        let classeScroll = 0;
-        classeScroll++;
+        //let classeScroll = 0;
+        //classeScroll++;
         
         for(let j = 0; j < todasMensagens.length; j++){
             if(mensagem.time === todasMensagens[j].time && mensagem.text === todasMensagens[j].text && mensagem.type === todasMensagens[j].type && mensagem.from === todasMensagens[j].from && mensagem.to === todasMensagens[j].to){
@@ -48,7 +70,7 @@ function intervalo(){
                 window.scrollTo(0,document.body.scrollHeight);
             }
 
-            else if(mensagem.type === 'private_message' && (mensagem.to === userName || mensagem.to === "Todos")){
+            else if(mensagem.type === 'private_message' && (mensagem.to === userName || mensagem.to === "Todos" || mensagem.to === "todos")){
                 pagina.innerHTML += `
                 <article class="private_message article" data-identifier="message">
                     <time>[${mensagem.time}]</time>
