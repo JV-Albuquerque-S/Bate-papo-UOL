@@ -59,7 +59,7 @@ function intervalo(){
                 window.scrollTo(0,document.body.scrollHeight);
             }
 
-            else if(mensagem.type === 'private_message' && (mensagem.to === userName || mensagem.to === "Todos" || mensagem.to === "todos")){
+            else if(mensagem.type === 'private_message' && (mensagem.from === userName || mensagem.to === userName || mensagem.to === "Todos" || mensagem.to === "todos")){
                 pagina.innerHTML += `
                 <article class="private_message article" data-identifier="message">
                     <time>[${mensagem.time}]</time>
@@ -85,7 +85,6 @@ setInterval(intervalo, 3000);
 //Envio de mensagens
 function enviarMensagem(){
     const mensagem = document.querySelector('input').value;
-    console.log(mensagem);
     const mensagemPadronizada = {
         from: userName,
         to: "Todos",
@@ -94,8 +93,16 @@ function enviarMensagem(){
     }
     const envio = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", mensagemPadronizada);
     envio.then(intervalo());
-    //envio.catch(window.location.reload());
+    document.querySelector("input").value = "";
 }
+
+let message_area = document.querySelector("#message")
+
+message_area.addEventListener("keypress", (e)=>{
+    if(e.key === "Enter"){
+        enviarMensagem()
+    }
+})
 
 //JS da barra lateral
 function aparecerBarra() {
